@@ -36,8 +36,7 @@ INSTALL_REQUIRES = [
 	'pyyaml>=5.3.1',
     'aubio>=0.4.9',
     'zeroconf>=0.28.6',
-    'pypiwin32>=223;platform_system=="Windows"',
-    'pyupdater>=3.1.1'
+    'pypiwin32>=223;platform_system=="Windows"'
 ]
 
 setup(
@@ -51,7 +50,6 @@ setup(
     url=PROJECT_URL,
     project_urls={
         'Documentation': 'https://ledfx.readthedocs.io/en/docs/index.html',
-        'Website': 'https://ledfx.app'
         'Source': 'https://github.com/ahodges9/LedFx',
         'Discord': 'https://discord.gg/PqXMuthSNx'
     },

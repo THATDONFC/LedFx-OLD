@@ -37,11 +37,9 @@ def validate_python() -> None:
         sys.exit(1)
 
 def setup_logging(loglevel):
-    loglevel = loglevel if loglevel else logging.WARNING
     logformat = "[%(asctime)s] %(levelname)s:%(name)s:%(message)s"
-    logging.basicConfig(stream=sys.stdout,
+    logging.basicConfig(level=loglevel, stream=sys.stdout,
                         format=logformat, datefmt="%Y-%m-%d %H:%M:%S")
-    logging.getLogger().setLevel(loglevel)
 
     # Suppress some of the overly verbose logs
     logging.getLogger('sacn').setLevel(logging.WARNING)
@@ -138,9 +136,8 @@ def main():
         update_ledfx()
     config_helpers.ensure_config_directory(args.config)
     ledfx = LedFxCore(config_dir = args.config,
-                      host = args.host,
-                      port = args.port)
-
+        host = args.host,
+        port = args.port)
     ledfx.start(open_ui = args.open_ui)
 
 
