@@ -1,10 +1,9 @@
-from ledfx.effects.temporal import TemporalEffect
-from ledfx.effects.gradient import GradientEffect
-#from ledfx.color import COLORS, GRADIENTS
-#from ledfx.effects import Effect
-import voluptuous as vol
 import numpy as np
-import logging
+import voluptuous as vol
+
+from ledfx.effects.gradient import GradientEffect
+from ledfx.effects.temporal import TemporalEffect
+
 
 class FadeEffect(TemporalEffect, GradientEffect):
     """
@@ -13,9 +12,15 @@ class FadeEffect(TemporalEffect, GradientEffect):
 
     NAME = "Fade"
 
-    CONFIG_SCHEMA = vol.Schema({
-        vol.Optional('speed', default = 0.5, description="Rate of change of color"): vol.All(vol.Coerce(float), vol.Range(min=0.1, max=10)),
-    })
+    CONFIG_SCHEMA = vol.Schema(
+        {
+            vol.Optional(
+                "speed",
+                default=0.5,
+                description="Rate of change of color",
+            ): vol.All(vol.Coerce(float), vol.Range(min=0.1, max=10)),
+        }
+    )
 
     def config_updated(self, config):
         self.idx = 0
@@ -31,7 +36,7 @@ class FadeEffect(TemporalEffect, GradientEffect):
         if self.forward:
             i = self.idx
         else:
-            i = 1-self.idx        
+            i = 1 - self.idx
 
         color = self.get_gradient_color(i)
         self.pixels = np.tile(color, (self.pixel_count, 1))
